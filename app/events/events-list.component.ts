@@ -2,7 +2,11 @@ import {Component} from '@angular/core'
 
 @Component({
     selector: 'event-list',
-    templateUrl: 'app/events/events-list.component.html'
+    templateUrl: 'app/events/events-list.component.html',
+    styles: [
+        `.my-text-color{color: red}
+        `
+    ]
 })
 
 export class EventsListComponent {
