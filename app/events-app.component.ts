@@ -3,7 +3,7 @@ import {Component} from '@angular/core'; // This is comming from the systemjs co
 
 @Component({
     selector: 'event-app',
-    template: '<div class="my-text-color"> Checking Text<Div><event-list> </event-list>'
+    template: '<nav-bar></nav-bar><event-list> </event-list>'
 })
 export class EventsAppComponent{
 
