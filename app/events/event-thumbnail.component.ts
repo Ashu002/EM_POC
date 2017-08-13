@@ -26,8 +26,14 @@ export class EventThumbnailComponent {
 
     @Output()
     eventClick = new EventEmitter()
+    someValue: any = "Some Value: "
     handleClickMe(){
         console.log('Clicked!!'); 
         this.eventClick.emit('Foo');
+    }
+
+    clickMeFun(){
+        console.log("Called using Template Reference Variable");
+        this.someValue = "Some Value Changed";
     }
 }
