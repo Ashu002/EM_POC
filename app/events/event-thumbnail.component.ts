@@ -4,7 +4,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
     selector: 'event-thumbnail', 
     template: `
     <div class="well hoverwell thumbnail">
-    <h2>{{event.name}}</h2>
+    <h2 class="my-text-color">{{event.name}}</h2>
     <div>Date: {{event.date}}</div>
     <div>
       Time: {{event.time}}
@@ -17,7 +17,11 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
       Online URL: {{event.onlineUrl}}
     </div>
     <button class="btn btn-primary" (click)="handleClickMe()"> Click Me</button>
-  </div>`
+  </div>`,
+  styles: [
+      `.my-text-color{color:green}
+      `
+  ]
 })
 
 export class EventThumbnailComponent {
