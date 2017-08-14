@@ -37,6 +37,7 @@ button {
 } */
 
 div.form-group>em{
-  color: red;
-  padding-left: 220px;
+  float:right; 
+  color:#E05C65; 
+  padding-left: 10px;
 }
