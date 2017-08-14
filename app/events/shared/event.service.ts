@@ -5,7 +5,7 @@ export class EventService{
     getEvent(){
       let subject :any = new Subject() // here sunject is a type of observables 
       setTimeout(() => {subject.next(EVENTS) /* Adding data to the stream of observables */; subject.complete()},
-       2000);
+       100);
       return subject
     }
     getEventById(id: number){
