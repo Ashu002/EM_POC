@@ -29,8 +29,10 @@
             <div class="navbar-header navbar-right">
               <ul class="nav navbar-nav">
                 <li>
-                  <a>Welcome John</a>
-                </li>
+                  <a *ngIf = "!authService.isAuthenticated()" [routerLink]="['/user', 'login']">Login</a>
+                  <a *ngIf = "authService.isAuthenticated()" [routerLink]="['/user', 'profile']">Welcome 
+                  {{authService.currentUSer.firstName}}</a>
+                </li> 
               </ul>
             </div>
             <form id="searchForm"  class="navbar-form navbar-right"  >
