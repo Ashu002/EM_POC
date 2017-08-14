@@ -3,7 +3,7 @@ import {Component} from '@angular/core'; // This is comming from the systemjs co
 
 @Component({
     selector: 'event-app',
-    template: '<nav-bar></nav-bar><event-list> </event-list>'
+    template: '<nav-bar></nav-bar><router-outlet></router-outlet>'
 })
 export class EventsAppComponent{
 

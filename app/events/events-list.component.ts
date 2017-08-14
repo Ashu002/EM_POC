@@ -1,30 +1,23 @@
-import {Component} from '@angular/core'
-
+import {Component, OnInit} from '@angular/core'
+import {EventService} from './shared/event.service';
+import {ToastrService} from '../common/toastr.service';
 @Component({
-    selector: 'event-list',
+    //selector: 'event-list', // not need now as we will be rendering using the route
     templateUrl: 'app/events/events-list.component.html',
-    styles: [
-        `.my-text-color{color: red}
-        `
-    ]
+
 })
 
-export class EventsListComponent {
-    event1 = 
-        {
-            id: 1,
-            name: 'Angular Connect',
-            date: '9/26/2036',
-            time: '10:00 am',
-            price: 599.99,
-            imageUrl: '/app/assets/images/angularconnect-shield.png',
-            location: {
-              address: '1057 DT',
-              city: 'London',
-              country: 'England'
-            },
-        }
-    handleDataFromChildComponent(data){
-        console.log('In Parent handleDataFromChildComponent() function:  ', data);
+export class EventsListComponent implements OnInit{
+    events : any[]
+    constructor(private eventService: EventService, private toastr: ToastrService){
+        
+    }
+
+    handleThumbnailClick(eventName){
+        this.toastr.success(eventName, "Raj");
+    }
+
+    ngOnInit(){ // we can also define this method without implementation of OnInt interface but this is a standard
+        this.events = this.eventService.getEvent()
     }
 }
