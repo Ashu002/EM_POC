@@ -9,6 +9,7 @@ import {
 } from './events/index'
 import {Error404Component} from './errors/404.components';
 import {EventListResolverService} from './events/event-list-resolver.service';
+import {UserModule} from './user/user.module';
 
 export const appRoutes :Routes = [
     {path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent']},
@@ -16,4 +17,5 @@ export const appRoutes :Routes = [
     {path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivator]},
     {path: '', redirectTo: '/events', pathMatch: 'full'},
     {path: '404', component: Error404Component} ,
+    {path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ]
