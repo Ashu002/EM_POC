@@ -4,40 +4,25 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
     selector: 'event-thumbnail', 
     template: `
     <div class="well hoverwell thumbnail">
-    <h2 class="my-text-color">{{event.name}}</h2>
-    <div>Date: {{event.date}}</div>
-    <div>
-      Time: {{event.time}}
+    <h2 class="my-text-color"><a [routerLink] = "['/events', event?.id]">{{event?.name}}</a></h2>
+    <div>Date: {{event?.date}}</div>
+    <div [ngStyle] = "{color:'red'}"[ngSwitch]="event?.time">
+        Time: {{event?.time}}
+        <span *ngSwitchCase="'8:00 am'"> (Early Start) </span>
+        <span *ngSwitchCase="'10:00 am'"> (Late Start) </span>
+        <span *ngSwitchDefault> (Normal Start) </span>
     </div>
-    <div>Price: \${{event.price}}</div>
+    <div>Price: \${{event?.price}}</div>
     <div>
       <span>Location: {{event?.location?.address}}</span>
     </div>
     <div>
-      Online URL: {{event.onlineUrl}}
+      Online URL: {{event?.onlineUrl}}
     </div>
-    <button class="btn btn-primary" (click)="handleClickMe()"> Click Me</button>
-  </div>`,
-  styles: [
-      `.my-text-color{color:green}
-      `
-  ]
+  </div>`
 })
 
 export class EventThumbnailComponent {
     @Input()
     event: any;
-
-    @Output()
-    eventClick = new EventEmitter()
-    someValue: any = "Some Value: "
-    handleClickMe(){
-        console.log('Clicked!!'); 
-        this.eventClick.emit('Foo');
-    }
-
-    clickMeFun(){
-        console.log("Called using Template Reference Variable");
-        this.someValue = "Some Value Changed";
-    }
 }

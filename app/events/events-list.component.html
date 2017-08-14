@@ -1,7 +1,9 @@
 <div>
 <h2 class="my-text-color"> Upcoming Events for Angular2 </h2>
 <hr/>
-<event-thumbnail #templateRefVariable [event] = 'event1' (eventClick) = 'handleDataFromChildComponent($event)'></event-thumbnail>
-<h1>{{templateRefVariable}}</h1>
-<button class="btn btn-primary" (click)="templateRefVariable.clickMeFun()">Parent Click Me</button>
+<div class="row">
+    <div class="col-md-5" *ngFor="let event of events">
+        <event-thumbnail (click)= "handleThumbnailClick(event.name)" [event] = 'event'></event-thumbnail>
+    </div>
+</div>
 </div>
