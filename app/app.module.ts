@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 import {EventsListComponent} from './events/events-list.component';
+import {EventListResolverService} from './events/event-list-resolver.service';
 import {EventThumbnailComponent} from './events/event-thumbnail.component';
 import {CreateEventComponent} from './events/create-event.component';
 import {Error404Component} from './errors/404.components';
@@ -36,7 +37,8 @@ import {appRoutes} from './routes';
         {
             provide: 'canDeactivateCreateEvent',
             useValue: checkDirtyState
-        }
+        },
+        EventListResolverService
     ]
 })
 export class AppModule{
