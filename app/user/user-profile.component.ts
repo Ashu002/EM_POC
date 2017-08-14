@@ -1,8 +1,55 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms'
+import {AuthService} from './auth.service'
+import {Router} from '@angular/router'
 @Component({
-    templateUrl: 'app/user/user-profile.component.html'
+    templateUrl: 'app/user/user-profile.component.html',
+    styles: [`
+    .error input {background-color:#E3C3C5;}
+    .error ::-webkit-input-placeholder { color: #999; }
+    .error ::-moz-placeholder { color: #999; }
+    .error :-moz-placeholder { color:#999; }
+    .error :ms-input-placeholder { color: #999; }
+  `]
 })
 
-export class UserProfileComponent{
+export class UserProfileComponent implements OnInit{
+    profileForm: FormGroup // This property need to bind in HTML with FormGroup directive
+    firstName: FormControl
+    lastName: FormControl
+    constructor(private authService: AuthService, private router:Router){
 
+    }
+
+    ngOnInit(){
+        /* This line is for single validator on same field */
+        //this.firstName = new FormControl(this.authService.currentUSer.firstName, Validators.required) // Validators passed as the 2nd paramater of the FormControl
+        
+        /* This line is for Multiple validator on same field */
+        this.firstName = new FormControl(this.authService.currentUSer.firstName, [Validators.required, Validators.pattern('[a-zA-Z].*')]) // Second argument will be array here
+        this.lastName = new FormControl(this.authService.currentUSer.lastName, Validators.required)
+        this.profileForm = new FormGroup({
+            firstName: this.firstName,
+            lastName: this.lastName
+        })
+    }
+    updateProfile(formValues){
+        if(this.profileForm.valid){
+            this.authService.updateCurrentUser(formValues.firstName, formValues.lastName);
+            this.router.navigate(['/events']);
+        }
+        
+    }
+
+    cancel(){
+        this.router.navigate(['/events']);
+    }
+
+    validateLastName(){
+       return (this.lastName.valid || this.lastName.untouched)
+    }
+
+    validateFirstName(){
+        return (this.firstName.valid || this.firstName.untouched)
+     }
 }
