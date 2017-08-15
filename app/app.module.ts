@@ -12,7 +12,9 @@ import {
     EventService,
     CreateSessionCompnent,
     SessionListComponent,
-    DurationPipe
+    UpvoteComponent,
+    DurationPipe,
+    VotersService
 } from './events/index'
 import {EventListResolverService} from './events/event-list-resolver.service';
 import {Error404Component} from './errors/404.components';
@@ -43,7 +45,8 @@ declare let jQuery: any;
         CollapsibleWellComponent,
          DurationPipe,
          SipmleModalComponent,
-         ModalTriggerDirective
+         ModalTriggerDirective,
+         UpvoteComponent
     ],
     bootstrap: [
         EventsAppComponent
@@ -65,7 +68,8 @@ declare let jQuery: any;
             useValue: checkDirtyState
         },
         EventListResolverService, 
-        AuthService
+        AuthService,
+        VotersService
     ]
 })
 export class AppModule{
