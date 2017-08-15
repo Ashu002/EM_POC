@@ -9,4 +9,6 @@ import {ISession} from '../shared/event.model'
 export class SessionListComponent{
     @Input()
     sessions: ISession[]
+    @Input()
+    filterBy: string
 }

@@ -1,5 +1,5 @@
 <div class="row" *ngFor="let session of sessions">
-    <div class="col-md-10">
+    <div class="col-md-10" *ngIf="(filterBy === 'All') || (filterBy === session.level)">
       <collapsible-well>
           <div well-title>
               {{session.name}}
@@ -13,4 +13,4 @@
           </div>
       </collapsible-well>
     </div>
-  </div>
+  </div>    
