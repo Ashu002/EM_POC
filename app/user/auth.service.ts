@@ -4,12 +4,14 @@ import {IUser} from './user.model'
 export class AuthService{
     currentUSer: IUser
     loginUser(userName: string, password: string){
+        console.log('we are heere')
         this.currentUSer = {
-            id: 1, 
+            id: 1,
             firstName: 'Raj',
             lastName: 'Ojha',
             userName: userName
         }
+        console.log(this.currentUSer)
     }   
 
     updateCurrentUser(firstName:string, lastName:string){
