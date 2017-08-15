@@ -14,7 +14,8 @@ import {
     SessionListComponent,
     UpvoteComponent,
     DurationPipe,
-    VotersService
+    VotersService,
+    LocationValidator
 } from './events/index'
 import {EventListResolverService} from './events/event-list-resolver.service';
 import {Error404Component} from './errors/404.components';
@@ -46,7 +47,8 @@ declare let jQuery: any;
          DurationPipe,
          SipmleModalComponent,
          ModalTriggerDirective,
-         UpvoteComponent
+         UpvoteComponent,
+         LocationValidator
     ],
     bootstrap: [
         EventsAppComponent
