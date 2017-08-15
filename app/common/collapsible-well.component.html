@@ -1,0 +1,6 @@
+<div (click) = "toggleContent()" class="well pointable">
+    <h4>
+        <ng-content select="[well-title]"></ng-content>
+    </h4>
+    <ng-content *ngIf="visiblity" select="[well-body]"></ng-content> <!-- all remaining Conent of parent component will show here -->
+</div>
