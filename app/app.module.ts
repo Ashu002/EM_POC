@@ -18,11 +18,13 @@ import {EventListResolverService} from './events/event-list-resolver.service';
 import {Error404Component} from './errors/404.components';
 import {NavbarComponent} from './nav/nav-bar.component';
 import {EventsAppComponent} from './events-app.component';
-import {ToastrService} from './common/toastr.service';
-import {CollapsibleWellComponent} from './common/collapsible-well.component';
+import {CollapsibleWellComponent, SipmleModalComponent, ModalTriggerDirective, TOASTER_TOKEN, JQ_TOKEN} from './common/index';
 import {appRoutes} from './routes';
 
 import {AuthService} from './user/auth.service'
+
+declare let toastr: any;
+declare let jQuery: any;
 
 @NgModule({
     imports: [
@@ -39,14 +41,24 @@ import {AuthService} from './user/auth.service'
          CreateSessionCompnent,
         SessionListComponent,
         CollapsibleWellComponent,
-         DurationPipe
+         DurationPipe,
+         SipmleModalComponent,
+         ModalTriggerDirective
     ],
     bootstrap: [
         EventsAppComponent
     ],
     providers: [
         EventService,
-        ToastrService,
+        //ToastrService,
+        {
+            provide: TOASTER_TOKEN,
+            useValue: toastr
+        }, // This means when we using TOASTER_TOKEN to inject dependency, we will get instance of toastr (really Awesome)
+        {
+            provide: JQ_TOKEN,
+            useValue: jQuery
+        },
         EventRouteActivator,
         {
             provide: 'canDeactivateCreateEvent',

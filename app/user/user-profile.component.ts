@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms'
 import {AuthService} from './auth.service'
 import {Router} from '@angular/router'
+import {TOASTER_TOKEN} from '../common/toastr.service'
 @Component({
     templateUrl: 'app/user/user-profile.component.html',
     styles: [`
@@ -17,7 +18,9 @@ export class UserProfileComponent implements OnInit{
     profileForm: FormGroup // This property need to bind in HTML with FormGroup directive
     firstName: FormControl
     lastName: FormControl
-    constructor(private authService: AuthService, private router:Router){
+    constructor(private authService: AuthService, 
+                private router:Router,
+                @Inject(TOASTER_TOKEN) private toastr){
 
     }
 
@@ -33,12 +36,15 @@ export class UserProfileComponent implements OnInit{
             lastName: this.lastName
         })
     }
+
     updateProfile(formValues){
+        console.log(formValues);
         if(this.profileForm.valid){
+            console.log('hello')
             this.authService.updateCurrentUser(formValues.firstName, formValues.lastName);
+            this.toastr.success('Profile Saved');
             this.router.navigate(['/events']);
         }
-        
     }
 
     cancel(){
