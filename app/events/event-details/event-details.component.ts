@@ -25,8 +25,18 @@ export class EventDetailsComponent{
 
        // This code is for routing in the same component 
        this.route.params.forEach((params: Params) =>{
-           this.event = this.eventService.getEventById(+params['id'])
-           this.addMode = false;
+           //### When using local data
+           //this.event = this.eventService.getEventById(+params['id'])
+           //this.addMode = false;
+
+           // ## Now using http API
+        //    this.eventService.getEventById(+params['id']).subscribe((event: IEvent) => {
+        //        this.event = event;
+        //        this.addMode = false
+        //    })
+
+        this.event = this.route.snapshot.data['event']
+        this.addMode = false;
        })
     }
     addSession(){
@@ -37,7 +47,8 @@ export class EventDetailsComponent{
         const nexId = Math.max.apply(null, this.event.sessions.map(s=>s.id))
         newSession.id = nexId + 1
         this.event.sessions.push(newSession)
-        this.eventService.updateEvent(this.event)
+        //this.eventService.updateEvent(this.event)
+        this.eventService.saveEvent(this.event).subscribe()
         this.addMode = false
     }
 
