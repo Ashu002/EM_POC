@@ -8,7 +8,7 @@ export class EventListResolverService implements Resolve<any>{
     constructor (private eventService: EventService){
 
     }
-    resolve(){
+    resolve(){ // if we are calling using resolver then we not need to subscribe as resovler does same for us
         return this.eventService.getEvent().map(events => events)
     }
 } 

@@ -2,22 +2,24 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
+import {HttpModule} from '@angular/http'
 
 import {
     EventsListComponent,
     EventThumbnailComponent,
     CreateEventComponent,
     EventDetailsComponent,
-    EventRouteActivator,
+    //EventRouteActivator,
     EventService,
     CreateSessionCompnent,
     SessionListComponent,
     UpvoteComponent,
     DurationPipe,
     VotersService,
-    LocationValidator
+    LocationValidator,
+    EventListResolverService,
+    EventResolverService
 } from './events/index'
-import {EventListResolverService} from './events/event-list-resolver.service';
 import {Error404Component} from './errors/404.components';
 import {NavbarComponent} from './nav/nav-bar.component';
 import {EventsAppComponent} from './events-app.component';
@@ -31,7 +33,7 @@ declare let jQuery: any;
 
 @NgModule({
     imports: [
-        BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, ReactiveFormsModule
+        BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, ReactiveFormsModule, HttpModule
     ],
     declarations: [
         EventsAppComponent, 
@@ -64,12 +66,13 @@ declare let jQuery: any;
             provide: JQ_TOKEN,
             useValue: jQuery
         },
-        EventRouteActivator,
+        //EventRouteActivator,
         {
             provide: 'canDeactivateCreateEvent',
             useValue: checkDirtyState
         },
         EventListResolverService, 
+        EventResolverService,
         AuthService,
         VotersService
     ]
