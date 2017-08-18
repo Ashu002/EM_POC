@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {AuthService} from '../user/auth.service';
 import {ISession} from '../events/shared/event.model'
 import {EventService} from '../events/shared/event.service'
+import {Router} from '@angular/router'
 
 @Component({
     selector: 'nav-bar',
@@ -16,7 +17,7 @@ import {EventService} from '../events/shared/event.service'
 export class NavbarComponent{
     searchTerm: string = ""
     foundSession: ISession[]
-    constructor(private authService: AuthService, private eventService: EventService){
+    constructor(private authService: AuthService, private eventService: EventService, private router: Router){
 
     }
     
@@ -27,5 +28,13 @@ export class NavbarComponent{
                 this.foundSession=session;
                 console.log(this.foundSession)
             });
+    }
+    
+    logout(){
+        console.log('we are here');
+        this.authService.logout().subscribe(()=>{
+            console.log(' now we are in subscribe method of logout in nav-bar.component')
+            this.router.navigate(['/user/login'])
+        })
     }
 }

@@ -38,6 +38,13 @@ export class AuthService{
     updateCurrentUser(firstName:string, lastName:string){
         this.currentUSer.firstName = firstName;
         this.currentUSer.lastName = lastName;
+
+        // Updating user profile to the server
+        let header = new Headers({'content-Type': 'application/json'})
+        let option = new RequestOptions({headers: header})
+
+        return this.http.put(`/api/users/${this.currentUSer.id}`, JSON.stringify(this.currentUSer), option)
+
     }
     isAuthenticated() : boolean {
         return !!this.currentUSer
@@ -55,7 +62,15 @@ export class AuthService{
             if(!! currenUser){
                 this.currentUSer = currenUser
             }
-        } ).subscribe()
+        } ).subscribe() 
 
+    }
+
+    logout(){
+        console.log('we are in auth sevice logout method')
+        this.currentUSer = undefined;    
+        let header = new Headers({'content-Type': 'application/json'})
+        let option = new RequestOptions({headers: header})
+        return this.http.post('/api/logout', JSON.stringify({}), option)
     }
 }
