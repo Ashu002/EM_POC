@@ -41,9 +41,11 @@ export class UserProfileComponent implements OnInit{
         console.log(formValues);
         if(this.profileForm.valid){
             console.log('hello')
-            this.authService.updateCurrentUser(formValues.firstName, formValues.lastName);
-            this.toastr.success('Profile Saved');
-            this.router.navigate(['/events']);
+            this.authService.updateCurrentUser(formValues.firstName, formValues.lastName).subscribe(() => {
+                this.toastr.success('Profile Saved');
+                this.router.navigate(['/events']);
+            });
+            
         }
     }
 
