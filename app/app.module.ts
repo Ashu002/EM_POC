@@ -1,15 +1,17 @@
+import './rxjs-extensions';
 import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms'
-import {HttpModule} from '@angular/http'
+import {RouterModule} from '@angular/router';
 
 import {
     EventsListComponent,
+    // tslint:disable-next-line:ordered-imports
     EventThumbnailComponent,
     CreateEventComponent,
     EventDetailsComponent,
-    //EventRouteActivator,
+    // EventRouteActivator,
     EventService,
     CreateSessionCompnent,
     SessionListComponent,
@@ -18,22 +20,24 @@ import {
     VotersService,
     LocationValidator,
     EventListResolverService,
-    EventResolverService
-} from './events/index'
+    EventResolverService,
+} from './events/index';
+// tslint:disable-next-line:ordered-imports
 import {Error404Component} from './errors/404.components';
 import {NavbarComponent} from './nav/nav-bar.component';
 import {EventsAppComponent} from './events-app.component';
-import {CollapsibleWellComponent, SipmleModalComponent, ModalTriggerDirective, TOASTER_TOKEN, JQ_TOKEN} from './common/index';
+import {CollapsibleWellComponent, 
+    SipmleModalComponent, ModalTriggerDirective, TOASTER_TOKEN, JQ_TOKEN} from './common/index';
 import {appRoutes} from './routes';
 
-import {AuthService} from './user/auth.service'
+import {AuthService} from './user/auth.service';
 
 declare let toastr: any;
 declare let jQuery: any;
 
 @NgModule({
     imports: [
-        BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, ReactiveFormsModule, HttpModule
+        BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, ReactiveFormsModule, HttpModule,
     ],
     declarations: [
         EventsAppComponent, 
@@ -50,23 +54,24 @@ declare let jQuery: any;
          SipmleModalComponent,
          ModalTriggerDirective,
          UpvoteComponent,
-         LocationValidator
+         LocationValidator,
     ],
     bootstrap: [
-        EventsAppComponent
+        EventsAppComponent,
     ],
     providers: [
         EventService,
-        //ToastrService,
+        // gToastrService,
         {
             provide: TOASTER_TOKEN,
             useValue: toastr
-        }, // This means when we using TOASTER_TOKEN to inject dependency, we will get instance of toastr (really Awesome)
+        },
+        // This means when we using TOASTER_TOKEN to inject dependency, we will get instance of toastr (really Awesome)
         {
             provide: JQ_TOKEN,
             useValue: jQuery
         },
-        //EventRouteActivator,
+        // EventRouteActivator,
         {
             provide: 'canDeactivateCreateEvent',
             useValue: checkDirtyState
@@ -77,13 +82,13 @@ declare let jQuery: any;
         VotersService
     ]
 })
-export class AppModule{
+export class AppModule {
     
 }
 
-function checkDirtyState(component: CreateEventComponent){
+function checkDirtyState(component: CreateEventComponent) {
     // if(component.isDirty){
-    //     return window.confirm("You have not save! Do you really want to cancel")
+    //     return window.confirm('You have not save! Do you really want to cancel')
     // }
     return true;
 }

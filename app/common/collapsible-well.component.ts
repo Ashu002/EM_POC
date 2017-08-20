@@ -2,14 +2,13 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'collapsible-well',
-    templateUrl: 'app/common/collapsible-well.component.html'
+    templateUrl: 'app/common/collapsible-well.component.html',
 })
-export class CollapsibleWellComponent{
+export class CollapsibleWellComponent {
 
-    visiblity:boolean = false
+    public visiblity: boolean = false;
 
-    toggleContent(){
-        //alert('ggg');
+    public toggleContent() {
         this.visiblity = !this.visiblity;
     }
 }

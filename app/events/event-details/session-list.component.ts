@@ -1,57 +1,61 @@
-import {Component, Input, OnChanges} from '@angular/core'
-import {ISession} from '../shared/event.model'
-import {VotersService} from './voters.service'
-import {AuthService} from '../../user/auth.service'
+import {Component, Input, OnChanges} from '@angular/core';
+import {AuthService} from '../../user/auth.service';
+import {ISession} from '../shared/event.model';
+import {VotersService} from './voters.service';
 
 @Component({
     selector: 'session-list',
-    templateUrl: 'app/events/event-details/session-list.component.html'
+    templateUrl: 'app/events/event-details/session-list.component.html',
 })
 
-export class SessionListComponent implements OnChanges{
+export class SessionListComponent implements OnChanges {
     @Input()
-    sessions: ISession[]
+    public sessions: ISession[];
     @Input()
-    filterBy: string
+    public filterBy: string;
     @Input()
-    sortBy: string
+    public sortBy: string;
 
     @Input()
-    eventId
+    public eventId;
 
-    visibleSessions: ISession[]
+    public visibleSessions: ISession[];
 
-    constructor(private authService: AuthService, private voterService: VotersService){
+    constructor(private authService: AuthService, private voterService: VotersService) {
 
     }
-    ngOnChanges(){
+    public ngOnChanges() {
         this.visibleSessions = this.sessions ? this.sessions.slice(0) : [];
-        this.sortBy === 'name' ?  this.visibleSessions.sort(sortByNameAsc) : this.visibleSessions.sort(sortByVotesDesc)
+        this.sortBy === 'name' ?  this.visibleSessions.sort(sortByNameAsc) : this.visibleSessions.sort(sortByVotesDesc);
     }
 
-    toggleVote(session: ISession){
-        console.log(this.userHasVoted(session))
-        if(this.userHasVoted(session)){
-            this.voterService.deleteVoter(this.eventId, session, this.authService.currentUSer.userName)
-        } else{
-            this.voterService.addVoter(this.eventId, session, this.authService.currentUSer.userName)
+    public toggleVote(session: ISession) {
+        // console.log(this.userHasVoted(session));
+        if(this.userHasVoted(session)) {
+            this.voterService.deleteVoter(this.eventId, session, this.authService.currentUSer.userName);
+        } else {
+            this.voterService.addVoter(this.eventId, session, this.authService.currentUSer.userName);
         }
-        if(this.sortBy === 'votes'){
+        if(this.sortBy === 'votes') {
             this.visibleSessions.sort(sortByVotesDesc);
         }
     }
 
-    userHasVoted(session:ISession){
-        return this.voterService.userHasVoted(session, this.authService.currentUSer.userName)
+    public userHasVoted(session: ISession) {
+        return this.voterService.userHasVoted(session, this.authService.currentUSer.userName);
     }
 }
 
-function sortByNameAsc(s1: ISession, s2:ISession){
-    if(s1.name > s2.name) return 1
-    else if (s1.name === s2.name) return 0
-    else return -1
+function sortByNameAsc(s1: ISession, s2: ISession) {
+    if(s1.name > s2.name) {
+        return 1;
+    } else if (s1.name === s2.name) {
+        return 0;
+    } else {
+        return -1;
+    }
 }
 
-function sortByVotesDesc(s1: ISession, s2:ISession){
-    return s2.voters.length - s1.voters.length
+function sortByVotesDesc(s1: ISession, s2: ISession) {
+    return s2.voters.length - s1.voters.length;
 }

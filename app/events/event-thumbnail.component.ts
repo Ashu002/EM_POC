@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
-import{IEvent} from './shared/event.model'
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {IEvent} from './shared/event.model';
 
 @Component({
     selector: 'event-thumbnail', 
@@ -20,10 +20,10 @@ import{IEvent} from './shared/event.model'
     <div>
       Online URL: {{event?.onlineUrl}}
     </div>
-  </div>`
+  </div>`,
 })
 
 export class EventThumbnailComponent {
     @Input()
-    event: IEvent;
+    public event: IEvent;
 }
