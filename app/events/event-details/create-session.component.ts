@@ -1,7 +1,7 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core'
-import {FormControl, FormGroup, Validators} from '@angular/forms'
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {ISession} from '../shared/event.model'
+import {ISession} from '../shared/event.model';
 @Component({
     selector: 'create-session',
     templateUrl: 'app/events/event-details/create-session.component.html',
@@ -11,52 +11,52 @@ import {ISession} from '../shared/event.model'
     .error ::-moz-placeholder { color: #999; }
     .error :-moz-placeholder { color:#999; }
     .error :ms-input-placeholder { color: #999; }
-  `]
+  `],
 })
 
-export class CreateSessionCompnent implements OnInit{
-    name: FormControl
-    presenter: FormControl
-    duration: FormControl
-    level: FormControl
-    abstract: FormControl
-    newSessionForm: FormGroup
+export class CreateSessionCompnent implements OnInit {
+    public name: FormControl;
+    public presenter: FormControl;
+    public duration: FormControl;
+    public level: FormControl;
+    public abstract: FormControl;
+    public newSessionForm: FormGroup;
     @Output()
-    saveNewSession = new EventEmitter()
-    @Output()
-    cancelCreateSession = new EventEmitter()
-    ngOnInit(){
-        this.name = new FormControl('', Validators.required)
-        this.presenter = new FormControl('', Validators.required)
-        this.duration = new FormControl('', Validators.required)
-        this.level = new FormControl('', Validators.required)
-        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400)])
+    public saveNewSession = new EventEmitter();
+     @Output()
+    public cancelCreateSession = new EventEmitter();
+    public ngOnInit() {
+        this.name = new FormControl('', Validators.required);
+        this.presenter = new FormControl('', Validators.required);
+        this.duration = new FormControl('', Validators.required);
+        this.level = new FormControl('', Validators.required);
+        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400)]);
 
         this.newSessionForm = new FormGroup({
             name: this.name,
             presenter: this.presenter,
             duration: this.duration,
             level: this.level,
-            abstract: this.abstract
-        })
+            abstract: this.abstract,
+        });
     }
 
-    saveSession(formValues){
-        console.log(formValues)
-        let session: ISession = {
+    public saveSession(formValues) {
+        // console.log(formValues);
+        const session: ISession = {
             id: undefined,
             name: formValues.name,
             duration: +formValues.duration,
             level: formValues.level,
             presenter: formValues.presenter,
             abstract: formValues.abstract,
-            voters: []
-        }
-        //Save logic will be here
+            voters: [],
+        };
+        // Save logic will be here
         this.saveNewSession.emit(session);
     }
 
-    cancel(){
-        this.cancelCreateSession.emit(true)
+    public cancel() {
+        this.cancelCreateSession.emit(true);
     }
 }

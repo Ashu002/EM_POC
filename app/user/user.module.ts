@@ -1,29 +1,29 @@
+import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common'
-import {RouterModule} from '@angular/router'
-import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
+import {LoginComponent} from './login.component';
 import {UserProfileComponent} from './user-profile.component';
-import {userRoutes} from './userRoutes'
-import {LoginComponent} from './login.component'
+import {userRoutes} from './userRoutes';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule.forChild(userRoutes)
+        RouterModule.forChild(userRoutes),
     ],
     declarations: [
-        UserProfileComponent, LoginComponent
+        UserProfileComponent, LoginComponent,
     ],
     exports: [
 
     ],
     providers: [
 
-    ]
+    ],
 })
-export class UserModule{
+export class UserModule {
 
 }

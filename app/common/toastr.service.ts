@@ -1,5 +1,5 @@
-//import {Injectable} from '@angular/core';
-//declare let toastr: any;
+// import {Injectable} from '@angular/core';
+// declare let toastr: any;
 // @Injectable()
 // export class ToastrService{
 
@@ -18,6 +18,6 @@
 // }
 
 /********* Now we will inject toastr service usinf OpaqueToken   ******** */
-import {OpaqueToken} from '@angular/core'
+import {OpaqueToken} from '@angular/core';
 
-export let TOASTER_TOKEN = new OpaqueToken('toastr')
+export let TOASTER_TOKEN = new OpaqueToken('toastr');
